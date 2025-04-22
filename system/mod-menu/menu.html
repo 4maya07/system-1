@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabla de Empleados</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <link rel="stylesheet" href="menu.css" />
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="admin-title">
+      <button class="menu-btn" id="menu-btn" onclick="toggleMenu()">
+        <span class="bar top-bar"></span>
+        <span class="bar middle-bar"></span>
+        <span class="bar bottom-bar"></span>
+      </button>
+    </div>
+    <div class="menu">
+      <h1 class="menu1">MENU</h1>
+      <button class="menu-item Home" onclick="window.location.href='../mod-menu/menu.html'">HOME</button>
+
+      <!-- Submenú CLIENTES -->
+      <div class="menu-item submenu-container">
+        <button class="clients" onclick="toggleSubMenu()">👥 CLIENTES</button>
+        <div class="submenu" id="clientSubMenu">
+          <button onclick="window.location.href='../mod-cliente/cliente.html'">👁 Ver Clientes</button>
+          <button onclick="openClientTypeModal()">➕ Añadir Cliente</button>
+        </div>
+      </div>
+
+      <button class="menu-item employees" onclick="window.location.href='Tbempleados.html'">👤 EMPLEADOS</button>
+      <button class="menu-item sales">🛒 PUNTO DE VENTA</button>
+      <button class="menu-item invoices">🧾 FACTURAS</button>
+      <button class="menu-item inventory" onclick="window.location.href='inventario.html'">📦 INVENTARIO</button>
+      <button class="menu-item settings">⚙️ CONFIGURACIÓN</button>
+    </div>
+  </aside>
+
+  <div class="content" id="content">
+    <div class="header">
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <img src="imcliente/logo.dycrist-removebg-preview - copia.png " alt="Logo" class="logo" />
+      <button class="logout-btn" onclick="window.location.href='../index.html'">Cerrar Sesión</button>
+    </div>
+
+
+
+  <div class="footer-scroll">
+    <div style="width: 1800px"></div>
+  </div>
+
+  <!-- Modal para seleccionar el tipo de cliente -->
+  <div id="clientTypeScreen" class="client-type-screen hidden">
+    <div class="client-type-box">
+      <h2>Selecciona el tipo de cliente</h2>
+      <button class="client-type-button" onclick="selectClientType('Contribuyente')">Contribuyente</button>
+      <button class="client-type-button" onclick="selectClientType('Sujeto Excluido')">Sujeto Excluido</button>
+      <button class="client-type-button" onclick="window.location.href='../mod-cliente/formulario-consumidor/fc.html'">Consumidor</button>
+      <button class="cancel-button" onclick="closeClientTypeScreen()">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Modal para seleccionar si es "Natural", "Jurídico", "ONG" o "Instituciones del Gobierno" -->
+  <div id="clientNatureScreen" class="client-type-screen hidden">
+    <div class="client-type-box">
+      <h2 id="clientTypeSelected"></h2>
+      <div id="natureButtons" class="nature-buttons hidden"></div>
+      <button class="cancel-button" onclick="closeClientNatureModal()">Cancelar</button>
+    </div>
+  </div>
+
+  <script src="menu.js"></script>
+</body>
+</html>

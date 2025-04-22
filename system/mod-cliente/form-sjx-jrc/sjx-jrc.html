@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario Sujeto Excluido Jurídico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="sjx-jrc.css" />
+</head>
+<body class="bodyprincipal">
+
+    <aside class="sidebar" id="sidebar">
+        <div class="admin-title">
+            <button class="menu-btn" id="menu-btn" onclick="toggleMenu()">
+                <span class="bar top-bar"></span>
+                <span class="bar middle-bar"></span>
+                <span class="bar bottom-bar"></span>
+            </button>
+        </div>
+        <div class="menu">
+            <h1 class="menu1">MENU</h1>
+            <button class="menu-item Home" onclick="window.location.href='../Home/home.html'">HOME</button>
+
+            <div class="menu-item submenu-container">
+                <button class="clients" onclick="toggleSubMenu()">👥 CLIENTES</button>
+                <div class="submenu" id="clientSubMenu">
+                    <button onclick="window.location.href='../modulocliente/cliente.html'">👁 Ver Clientes</button>
+                    <button onclick="openClientTypeModal()">➕ Añadir Cliente</button>
+                </div>
+            </div>
+            <div class="con"></div>
+
+            <button class="menu-item employees" onclick="window.location.href='Tbempleados.html'">👤 EMPLEADOS</button>
+            <button class="menu-item sales">🛒 PUNTO DE VENTA</button>
+            <button class="menu-item invoices">🧾 FACTURAS</button>
+            <button class="menu-item inventory" onclick="window.location.href='inventario.html'">📦 INVENTARIO</button>
+            <button class="menu-item settings">⚙️ CONFIGURACIÓN</button>
+        </div>
+    </aside>
+
+    <div class="content" id="content">
+        <div class="header">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <img src="imcliente/logo.dycrist-removebg-preview - copia.png" alt="Logo" class="logo" />
+            <button class="logout-btn" onclick="window.location.href='Login.html'">Cerrar Sesión</button>
+        </div>
+
+        <div class="f1">
+            <div class="card">
+                <h2>Formulario Cliente Sujeto Excluido - Persona Jurídica</h2>
+                <form id="clienteForm" class="grid" action="procesar_sjx_jrc.php" method="POST" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <input type="text" id="id" name="id" placeholder=" " />
+                        <label for="id">Identificador o ID (1A-0001, 2A-0002) - Sucursal o Compartido</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="registro" name="registro" placeholder=" " required />
+                        <label for="registro">Número de Registro (FE-0001)</label>
+                    </div>
+
+                    <div class="form-group full">
+                        <input type="text" id="nombreLegal" name="nombreLegal" placeholder=" " required />
+                        <label for="nombreLegal">Nombre Legal de la Empresa</label>
+                    </div>
+
+                    <div class="form-group full">
+                        <input type="text" id="nombreComercial" name="nombreComercial" placeholder=" " />
+                        <label for="nombreComercial">Nombre Comercial (si aplica)</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="file" id="logo" name="logo" accept="image/*" />
+                        <label for="logo">Fotografía del Logo</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="nit" name="nit" placeholder=" " required />
+                        <label for="nit">NIT</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="iva" name="iva" placeholder=" " required />
+                        <label for="iva">Número de Registro de IVA</label>
+                    </div>
+
+                    <div class="form-group full">
+                        <input type="text" id="giro" name="giro" placeholder=" " required />
+                        <label for="giro">Giro de Actividad Económica</label>
+                    </div>
+
+                    <div class="form-group full">
+                        <textarea id="direccion" name="direccion" placeholder=" " rows="3" required></textarea>
+                        <label for="direccion">Dirección Fiscal</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="departamento" name="departamento" placeholder=" " required />
+                        <label for="departamento">Departamento y Municipio</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" id="telefonoEmpresa" name="telefonoEmpresa" placeholder=" " required />
+                        <label for="telefonoEmpresa">Teléfono de la Empresa</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" id="correoEmpresa" name="correoEmpresa" placeholder=" " />
+                        <label for="correoEmpresa">Correo Electrónico de la Empresa</label>
+                    </div>
+
+                    <div class="form-group full">
+                        <input type="text" id="contactoNombre" name="contactoNombre" placeholder=" " required />
+                        <label for="contactoNombre">Nombre del Contacto</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="duiContacto" name="duiContacto" placeholder=" " required />
+                        <label for="duiContacto">DUI del Contacto</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" id="correoContacto" name="correoContacto" placeholder=" " />
+                        <label for="correoContacto">Correo del Contacto</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" id="telefonoContacto" name="telefonoContacto" placeholder=" " required />
+                        <label for="telefonoContacto">Teléfono del Contacto</label>
+                    </div>
+
+                    <h3 class="section-title full">REPRESENTANTE LEGAL</h3>
+                    <div class="form-group full">
+                        <input type="text" id="repNombre" name="repNombre" placeholder=" " required />
+                        <label for="repNombre">Nombre Completo del Representante Legal</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="repDui" name="repDui" placeholder=" " required />
+                        <label for="repDui">DUI</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="repNcr" name="repNcr" placeholder=" " />
+                        <label for="repNcr">NCR</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="repPasaporte" name="repPasaporte" placeholder=" " />
+                        <label for="repPasaporte">Pasaporte (si aplica)</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="repCargo" name="repCargo" placeholder=" " />
+                        <label for="repCargo">Cargo que Ocupa en la Empresa</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" id="repTelefono" name="repTelefono" placeholder=" " />
+                        <label for="repTelefono">Teléfono</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" id="repCorreo" name="repCorreo" placeholder=" " />
+                        <label for="repCorreo">Correo Electrónico</label>
+                    </div>
+
+                    <div class="form-actions full">
+                        <button type="submit">Registrar Cliente</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-scroll">
+            <div style="width: 1800px"></div>
+        </div>
+    </div>
+
+    <div id="clientTypeScreen" class="client-type-screen hidden">
+        <div class="client-type-box">
+            <h2>Selecciona el tipo de cliente</h2>
+            <button class="client-type-button" onclick="selectClientType('Contribuyente')">Contribuyente</button>
+            <button class="client-type-button" onclick="selectClientType('Sujeto Excluido')">Sujeto Excluido</button>
+            <button class="client-type-button" onclick="window.location.href='../formulario,consumidor/fc.html'">Consumidor</button>
+            <button class="cancel-button" onclick="closeClientTypeScreen()">Cancelar</button>
+        </div>
+    </div>
+
+    <div id="clientNatureScreen" class="client-type-screen hidden">
+        <div class="client-type-box">
+            <h2 id="clientTypeSelected"></h2>
+            <div id="natureButtons" class="nature-buttons hidden"></div>
+            <button class="cancel-button" onclick="closeClientNatureModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="sjx-jrc.js"></script>
+</body>
+</html>

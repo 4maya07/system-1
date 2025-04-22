@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario Contribuyente Natural</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="ctb-ntl.css" />
+</head>
+<body class="bodyprincipal">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="admin-title">
+      <button class="menu-btn" id="menu-btn" onclick="toggleMenu()">
+        <span class="bar top-bar"></span>
+        <span class="bar middle-bar"></span>
+        <span class="bar bottom-bar"></span>
+      </button>
+    </div>
+    <div class="menu">
+      <h1 class="menu1">MENU</h1>
+      <button class="menu-item Home" onclick="window.location.href='/system/mod-menu/menu.html'">HOME</button>
+
+      <!-- Submenú CLIENTES -->
+      <div class="menu-item submenu-container">
+        <button class="clients" onclick="toggleSubMenu()">👥 CLIENTES</button>
+        <div class="submenu" id="clientSubMenu">
+          <button onclick="window.location.href='../cliente.html'">👁 Ver Clientes</button>
+          <button onclick="openClientTypeModal()">➕ Añadir Cliente</button>
+        </div>
+      </div>
+      <div class="con"></div>
+
+      <button class="menu-item employees" onclick="window.location.href='../cliente.html'">👤 EMPLEADOS</button>
+      <button class="menu-item sales">🛒 PUNTO DE VENTA</button>
+      <button class="menu-item invoices">🧾 FACTURAS</button>
+      <button class="menu-item inventory" onclick="window.location.href='inventario.html'">📦 INVENTARIO</button>
+      <button class="menu-item settings">⚙️ CONFIGURACIÓN</button>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <div class="content" id="content">
+    <div class="header">
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <img src="imcliente/logo.dycrist-removebg-preview - copia.png" alt="Logo" class="logo" />
+      <button class="logout-btn" onclick="window.location.href='../../index.html'">Cerrar Sesión</button>
+    </div>
+
+    <div class="f1">
+      <div class="card">
+        <h2>Formulario Cliente Contribuyente Natural</h2>
+        <form id="clienteForm" class="grid" action="ctb_ntl.php" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+              <input type="text" id="id" name="id" placeholder=" "/>
+              <label for="id">Identificador o ID (ej. 1A-0001)</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="text" id="registro" name="registro" placeholder=" "/>
+              <label for="registro">Número de Registro (ej. FE-0001)</label>
+          </div>
+      
+          <div class="form-group full">
+              <input type="text" id="nombre" name="nombre" placeholder=" " required />
+              <label for="nombre">Nombre Completo</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="file" id="foto" name="foto" accept="image/*" />
+              <label for="foto">Fotografía</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="text" id="dui" name="dui" placeholder=" " />
+              <label for="dui">DUI</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="number" id="edad" name="edad" placeholder=" " />
+              <label for="edad">Edad (si aplica)</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="text" id="pasaporte" name="pasaporte" placeholder=" " />
+              <label for="pasaporte">Pasaporte (si aplica)</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="text" id="nit" name="nit" placeholder=" " />
+              <label for="nit">NIT (no requerido)</label>
+          </div>
+      
+          <div class="form-group full">
+              <textarea id="direccion" name="direccion" placeholder=" " rows="3" required></textarea>
+              <label for="direccion">Dirección Fiscal</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="tel" id="telefono" name="telefono" placeholder=" " required />
+              <label for="telefono">Teléfono</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="email" id="correo" name="correo" placeholder=" " required />
+              <label for="correo">Correo Electrónico</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="text" id="nombre_comercial" name="nombre_comercial" placeholder=" " />
+              <label for="nombre_comercial">Empresa</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="text" id="registro_iva" name="registro_iva" placeholder=" " />
+              <label for="registro_iva">Registro de IVA (si aplica)</label>
+          </div>
+      
+          <div class="form-group">
+              <input type="text" id="giro" name="giro" placeholder=" " />
+              <label for="giro">Giro o Actividad Económica (si aplica)</label>
+          </div>
+      
+          <div class="form-group full">
+              <input type="date" id="fechaRegistro" name="fechaRegistro" required />
+              <label for="fechaRegistro">Fecha de Registro</label>
+          </div>
+      
+          <div class="form-actions full">
+              <button type="submit">Registrar Cliente</button>
+          </div>
+      </form>
+      </div>
+    </div>
+
+    <div class="footer-scroll">
+      <div style="width: 1800px"></div>
+    </div>
+  </div>
+
+  <!-- Modales -->
+  <div id="clientTypeScreen" class="client-type-screen hidden">
+    <div class="client-type-box">
+      <h2>Selecciona el tipo de cliente</h2>
+      <button class="client-type-button" onclick="selectClientType('Contribuyente')">Contribuyente</button>
+      <button class="client-type-button" onclick="selectClientType('Sujeto Excluido')">Sujeto Excluido</button>
+      <button class="client-type-button" onclick="window.location.href='../formulario,consumidor/fc.html'">Consumidor</button>
+      <button class="cancel-button" onclick="closeClientTypeScreen()">Cancelar</button>
+    </div>
+  </div>
+
+  <div id="clientNatureScreen" class="client-type-screen hidden">
+    <div class="client-type-box">
+      <h2 id="clientTypeSelected"></h2>
+      <div id="natureButtons" class="nature-buttons hidden"></div>
+      <button class="cancel-button" onclick="closeClientNatureModal()">Cancelar</button>
+    </div>
+  </div>
+
+  <script src="ctb-ntl.js"></script>
+</body>
+</html>

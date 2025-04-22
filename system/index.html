@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="mod-inicio/login.css">
+</head>
+<body>
+    <div class="containerPrincipal">
+        <div class="container1">
+            <img src="mod-inicio/img_login/logo.dycrist-removebg-preview.png" alt="Logo">
+        </div>
+        <div class="containerInicio">
+            <form action="mod-inicio/ctr_inicio.php" method="POST">
+                <div class="input-container">
+                    <input type="text" name="nombreUsuario" id="nombreUsuario" placeholder=" " required>
+                    <label for="nombreUsuario">Nombre de Usuario</label>
+                </div>
+                <br>
+                <div class="input-container">
+                    <input type="password" name="contrasena" id="contrasena" placeholder=" " required>
+                    <label for="contrasena">Contraseña</label>
+                </div>
+                <div class="containerBoton">
+                    <button type="submit">Iniciar Sesión</button>
+                    <button type="reset">Cancelar</button>
+                </div>
+            </form>
+        </div>
+        <p>Derechos de Autor © 2021, DyCrist - Todos los derechos reservados MAYCOL MARICON.</p>
+    </div>
+    <script src="mod-inicio/validacion_inicio.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabla de Clientes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="cliente.css" />
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="admin-title">
+        <button class="menu-btn" id="menu-btn" onclick="toggleMenu()">
+            <span class="bar top-bar"></span>
+            <span class="bar middle-bar"></span>
+            <span class="bar bottom-bar"></span>
+        </button>
+    </div>
+    <div class="menu">
+        <h1 class="menu1">MENU</h1>
+        <button class="menu-item Home" onclick="window.location.href='../mod-menu/menu.html'">HOME</button>
+
+        <div class="menu-item submenu-container">
+            <button class="clients" onclick="toggleSubMenu()">👥 CLIENTES</button>
+            <div class="submenu" id="clientSubMenu">
+                <button onclick="window.location.href='cliente.html'">👁 Ver Clientes</button>
+                <button onclick="openClientTypeModal()">➕ Añadir Cliente</button>
+            </div>
+        </div>
+
+        <button class="menu-item employees" onclick="window.location.href='Tbempleados.html'">👤 EMPLEADOS</button>
+        <button class="menu-item sales">🛒 PUNTO DE VENTA</button>
+        <button class="menu-item invoices">🧾 FACTURAS</button>
+        <button class="menu-item inventory" onclick="window.location.href='inventario.html'">📦 INVENTARIO</button>
+        <button class="menu-item settings">⚙ CONFIGURACIÓN</button>
+    </div>
+</aside>
+
+<div class="content" id="content">
+    <div class="header">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <img src="imcliente/logo.dycrist-removebg-preview - copia.png" alt="Logo" class="logo" />
+        <button class="logout-btn" onclick="window.location.href='../index.html'">Cerrar Sesión</button>
+    </div>
+        <h1 class="h1">TABLA CLIENTES</h1>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar cliente..." onkeyup="searchEmployee()" />
+        </div>
+        <div class="table-container">
+            <table id="employeeTable">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Tipo de cliente</th>
+                        <th>Empresa</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="footer-scroll">
+        <div style="width: 1800px"></div>
+      </div>
+    
+      <!-- Modal para seleccionar el tipo de cliente -->
+      <div id="clientTypeScreen" class="client-type-screen hidden">
+        <div class="client-type-box">
+          <h2>Selecciona el tipo de cliente</h2>
+          <button class="client-type-button" onclick="selectClientType('Contribuyente')">Contribuyente</button>
+          <button class="client-type-button" onclick="selectClientType('Sujeto Excluido')">Sujeto Excluido</button>
+          <button class="client-type-button" onclick="window.location.href='../mod-cliente/formulario-consumidor/fc.html'">Consumidor</button>
+          <button class="cancel-button" onclick="closeClientTypeScreen()">Cancelar</button>
+        </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            cargarClientes();
+        });
+
+        function toggleSubMenu() {
+            const submenu = document.getElementById("clientSubMenu");
+            submenu.classList.toggle("show");
+        }
+
+        function cargarClientes() {
+            fetch('obtener_clientes.php')
+                .then(response => response.json())
+                .then(data => {
+                    const employeeBody = document.getElementById('employeeBody');
+                    employeeBody.innerHTML = '';
+
+                    if (data.error) {
+                        console.error('Error al cargar clientes:', data.error);
+                        employeeBody.innerHTML = '<tr><td colspan="7">Error al cargar los clientes.</td></tr>';
+                        return;
+                    }
+
+                    data.data.forEach(cliente => {
+                        let row = employeeBody.insertRow();
+                        let cellFoto = row.insertCell();
+                        let cellID = row.insertCell();
+                        let cellNombre = row.insertCell();
+                        let cellApellido = row.insertCell();
+                        let cellTipoCliente = row.insertCell();
+                        let cellEmpresa = row.insertCell();
+                        let cellAcciones = row.insertCell();
+
+                        if (cliente.Foto) {
+                            cellFoto.innerHTML = `<img src="data:image/jpeg;base64,${cliente.Foto}" alt="Foto Cliente" width="50" height="50">`;
+                        } else {
+                            cellFoto.innerHTML = '';
+                        }
+                        cellID.textContent = cliente.ID;
+                        cellNombre.textContent = cliente.Nombre;
+                        cellApellido.textContent = cliente.Apellido;
+                        cellTipoCliente.textContent = cliente.TipoCliente;
+                        cellEmpresa.textContent = cliente.Empresa;
+                        cellAcciones.innerHTML = cliente.Acciones;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error de red:', error);
+                    const employeeBody = document.getElementById('employeeBody');
+                    employeeBody.innerHTML = '<tr><td colspan="7">Error de red al cargar los clientes.</td></tr>';
+                });
+        }
+
+        function verCliente(id) {
+            console.log('Ver cliente con ID:', id);
+        }
+
+        function modificarCliente(id) {
+            console.log('Modificar cliente con ID:', id);
+        }
+
+        function eliminarCliente(id) {
+            console.log('Eliminar cliente con ID:', id);
+        }
+
+        function openClientTypeModal() {
+            alert("Abrir modal para seleccionar tipo de cliente.");
+        }
+
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active'); // Asumo que tienes una clase 'active' en tu CSS para mostrar/ocultar la sidebar
+        }
+    </script>
+        <script src="cliente.js"></script>
+</body>
+</html>
